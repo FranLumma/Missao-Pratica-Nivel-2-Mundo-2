@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catálogo de Receitas</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body onload="preencheCatalogo()">
+    <h1>Catálogo de Receitas</h1>
+    <div class="container-fluid bg-warning d-flex justify-content-center">
+      <div class="flex-wrap d-flex" id="pnlCatalogo"></div>
+    </div>
+    <script>
+      var receitas = [
+        {
+          titulo: "Bolo de Chocolate",
+          img: "./assets/bolo_chocolate.jpg",
+          preparo:
+            "1. Pré-aqueça o forno a 180°C.\n2. Misture os ingredientes secos em uma tigela.\n3. Adicione os ingredientes líquidos e misture bem.\n4. Despeje a massa em uma forma untada.\n5. Asse por 30 minutos.",
+          ingredientes: [
+            "2 xícaras de farinha de trigo",
+            "1 xícara de açúcar",
+            "1/2 xícara de cacau em pó",
+            "1 colher de chá de fermento em pó",
+            "1/2 colher de chá de sal",
+            "1 xícara de leite",
+            "1/2 xícara de óleo vegetal",
+            "2 ovos",
+            "1 colher de chá de essência de baunilha",
+          ],
+        },
+        {
+          titulo: "Salada de Frutas",
+          img: "./assets/salada_frutas.jpg",
+          preparo:
+            "1. Lave e corte as frutas em pedaços.\n2. Misture todas as frutas em uma tigela.\n3. Deixe na geladeira por 1 hora antes de servir.",
+          ingredientes: [
+            "1 maçã",
+            "1 banana",
+            "1 laranja",
+            "1 xícara de morangos",
+            "1 xícara de uvas",
+            "2 colheres de sopa de mel",
+            "1 colher de chá de suco de limão",
+          ],
+        },
+        {
+          titulo: "Sopa de Tomate",
+          img: "./assets/sopa_tomate.jpg",
+          preparo:
+            "1. Refogue cebola e alho em azeite até dourar.\n2. Adicione tomates picados e cozinhe por 15 minutos.\n3. Acrescente caldo de legumes e deixe ferver.\n4. Bata a sopa até ficar cremosa.\n5. Tempere com sal, pimenta e manjericão a gosto.",
+          ingredientes: [
+            "1 cebola",
+            "2 dentes de alho",
+            "6 tomates maduros",
+            "4 xícaras de caldo de legumes",
+            "2 colheres de sopa de azeite",
+            "Sal e pimenta a gosto",
+            "Folhas de manjericão fresco",
+          ],
+        },
+        {
+          titulo: "Frango Grelhado com Limão",
+          img: "./assets/frango_limao.jpg",
+          preparo:
+            "1. Tempere os peitos de frango com sal, pimenta e alho em pó.\n2. Aqueça uma grelha e cozinhe o frango até que esteja completamente cozido.\n3. Esprema suco de limão sobre o frango antes de servir.",
+          ingredientes: [
+            "4 peitos de frango",
+            "Sal e pimenta a gosto",
+            "1 colher de chá de alho em pó",
+            "Suco de 2 limões",
+            "2 colheres de sopa de azeite",
+          ],
+        },
+      ];
+
+      function getListaIngredientes(receita) {
+        let lista =
+          "<ul>" +
+          receita.ingredientes
+            .map((item) => "<li>" + item + "</li>")
+            .reduce((acc, curr) => acc + curr, "") +
+          "</ul>";
+        return lista;
+      }
+
+      function getCard(receita) {
+        let card = `<div class='card m-2' style='width: 250px'><img src='${
+          receita["img"]
+        }' class='card-img-top' style='height: 150px; object-fit: cover;'/><div class='card-body'><h4 class='card-title'>${
+          receita["titulo"]
+        }</h4><div class='card-text'><div>${getListaIngredientes(
+          receita
+        )}</div><hr /><p>${receita["preparo"]}</p></div></div></div>`;
+        return card;
+      }
+
+      function preencheCatalogo() {
+        let catalogo = document.getElementById("pnlCatalogo");
+        let conteudo = receitas
+          .map((item) => getCard(item))
+          .reduce((acc, curr) => acc + curr, "");
+
+        catalogo.innerHTML = conteudo;
+      }
+    </script>
+  </body>
+</html>
