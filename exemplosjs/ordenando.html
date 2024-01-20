@@ -63,9 +63,11 @@
         for (i = 0; i < lista_de_valores.children.length; i++) {
           var valor_filho = lista_de_valores.children[i].innerHTML;
           var valor_inteiro = eval(valor_filho);
-          valores.push(valor_filho);
+          valores.push(valor_inteiro);
         }
+
         var listaOrdenada = [];
+
         switch (lista_de_selecao.selectedIndex) {
           case 0: {
             listaOrdenada = bubble_sort(valores);
@@ -76,7 +78,7 @@
             break;
           }
           case 2: {
-            listaOrdenada = quick_sort(valores, 0, valores.length);
+            listaOrdenada = quick_sort(valores, 0, valores.length - 1);
             break;
           }
         }
@@ -88,6 +90,7 @@
         novosItens = listaOrdenada
           .map((valor) => "<li>" + valor + "</li>")
           .reduce((acc, curr) => acc + curr, "");
+
         lista_de_valores.innerHTML = novosItens;
       }
       function misturar() {
@@ -96,7 +99,7 @@
         for (i = 0; i < lista_de_valores.children.length; i++) {
           var valor_filho = lista_de_valores.children[i].innerHTML;
           var valor_inteiro = eval(valor_filho);
-          valores.push(valor_filho);
+          valores.push(valor_inteiro);
         }
         valores_shuffle = shuffle(valores, 5);
         novosItens = valores_shuffle
